@@ -1,7 +1,7 @@
 <!--
 Author: Gleidson G. Guilhem
 Created: 15/05/2022
-Description: Page php to bring data from db7_forms and update agents by approving "Gerencia" and "Funcionario". When Funcionario approves, send an email to 
+Description: Page php to bring data from db7_forms and update agents by approving "Gerencia" and "RH". When RH approves, send an email to 
 Gerente to approve.
 -->
 <!DOCTYPE html>
@@ -10,12 +10,9 @@ Gerente to approve.
     <title>Crud Wordpress</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-
 </head>
 <body>
     <div class="container">
-
-
         <!-- Opening main table -->
         <table id="datatableid" class="table table-striped">
             <thead>
@@ -28,7 +25,6 @@ Gerente to approve.
                     <th scope="col" colspan="2">Status</th>
                 </tr>
             </thead>
-
             <?php
             use function PHPSTORM_META\type;
 
@@ -71,7 +67,6 @@ Gerente to approve.
 
                 //Showing Data (Populating table)
             ?>
-
                 <tr>
                     <td><b><?php echo $id ?></b></td>
                     <td><?php echo $postID ?></td>
@@ -84,7 +79,7 @@ Gerente to approve.
                     <td>
                         <?php
                         if ($status == "1") {
-                            echo "<font style='font-weight: bold; color: blue;'><i class='bi bi-clipboard2-fill'> Aprovado Funcionario </i>";
+                            echo "<font style='font-weight: bold; color: blue;'><i class='bi bi-clipboard2-fill'> Aprovado RH </i>";
                         } else if ($status == "2") {
                             echo "<font style='font-weight: bolder; color: green';><i class='bi bi-clipboard2-data-fill'> Aprovado Gerencia </i>";
                         } else {
@@ -100,8 +95,7 @@ Gerente to approve.
             ?>
             <!-- Closing main table -->
     </div>
-    </table>
-
+    </table
     <?php
     $i = 0;
     //variable t0 define modal array size
@@ -142,8 +136,8 @@ Gerente to approve.
                 </div>
                 <div class="modal-body">
                 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-                    ID: <input type="text" name="edit_id" id="edit_id" disabled  size="1" style='font-weight: bolder;' ><br>
-                    
+                    <h6><span class="badge badge-secondary" id="status"></span></h6>    
+                    <input type="hidden" name="edit_id" id="edit_id" disabled  size="1" style='font-weight: bolder;'>
                     <table class="table table-striped table-borderless">
                         <thead>
                             <tr>
@@ -162,7 +156,7 @@ Gerente to approve.
                                     <td><label name="sDate" id="sDate"></td>
                                     </td>
                                     <td>
-                                        <input type="checkbox" class="form-check-input" name="aprovadoHr" id="aprovadoHr" value="aprovadoHr" <?php echo "";
+                                        <input type="checkbox" class="form-check-input" name="aprovadoHr" id="aprovadoHr" value="aprovadoHr" <?php  echo "";
                                                                                                                                                 echo " enabled"; ?>>Aprovado<br>
                                         <input type="checkbox" class="form-check-input" name="aprovadoGr" id="aprovadoGr" value="aprovadoGr" <?php echo "";
                                                                                                                                                 echo " disabled"; ?>>Arovado Ger.
@@ -205,8 +199,7 @@ Gerente to approve.
                                 <tr>
                                     <td><label name="nome_del" id="nome_del"></td>
                                     </td>
-                                    <td width="25%"><button type="submit" id="deletesubmit" name="deletesubmit" class="btn btn-danger btn-sm">Apagar </button> <a href="<?php echo $PAGE_NAME ?>.php"><button type="button" class="btn btn-light btn-sm">Cancelar</button></a></td>
-
+                                    <td width="25%"><button type="submit" id="deletesubmit" name="deletesubmit" class="btn btn-danger btn-sm">Apagar </button> <a href="<?php echo $PAGE_NAME ?>.php"><button type="button" class="btn btn-light btn-sm">Cancelar</button></a></td>    
                                 </tr>
                             </form>
                         </tbody>
@@ -240,13 +233,12 @@ Gerente to approve.
             $formValue['Aprovado'] = $status_user;
 
             $serialized = serialize($formValue);
-            echo $serialized;
             
             $updated = $wpdb->query("UPDATE $tabela SET form_value='$serialized' WHERE form_id = $id_user");
             
             if($updated) {
                 echo "<script>alert(Atualizado com sucesso)</script>";
-                echo "<script>location.replace('formdata999.php');</script>";
+                echo "<script>location.replace('$PAGE_NAME.php');</script>";
             }else {
                 echo "Algo deu errado";
             }
@@ -262,23 +254,20 @@ Gerente to approve.
             
             if($deleted) {
                 echo "<script>alert(Atualizado com sucesso)</script>";
-                echo "<script>location.replace('formdata999.php');</script>";
+                echo "<script>location.replace('$PAGE_NAME.php');</script>";
             }else {
                 echo "Algo deu errado";
             }
         }
     ?>
     <!-- ####################################################### UPDATE DATA ###################################################### -->
-
-
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://smtpjs.com/v3/smtp.js"></script>
-
-
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 <script>
     var edit_id = 0;
     var apr = false;
@@ -299,7 +288,7 @@ Gerente to approve.
             $('#postID').html(data[1]);
             $('#nome').html(data[2]);
             $('#sDate').html(data[3]);
-            $('#status').val(data[5]);
+            $('#status').html(data[5]);
 
             //Check data F12 (Console)
             console.log(data[0] + "," +
@@ -308,14 +297,31 @@ Gerente to approve.
                 data[3] + "," +
                 data[5]);
 
-            
-
             edit_id = data[0];
             aprHR = false;
             nome = data[2];
             status = data[5]
 
-            /*Check if checkbox is checked*/
+            //Control checkbox depending on the status
+            if(status.trim() == "-") {
+                $('input[name="aprovadoHr"]').prop('checked', false);
+                $('input[name="aprovadoHr"]').attr("disabled", false); 
+                $('input[name="aprovadoGr"]').prop('checked', false);
+                $('input[name="aprovadoGr"]').attr("disabled", true); 
+            }else if(status.trim() == "Aprovado RH") {
+                $('input[name="aprovadoHr"]').prop('checked', true);
+                $('input[name="aprovadoHr"]').attr("disabled", true); 
+                $('input[name="aprovadoGr"]').prop('checked', false);
+                $('input[name="aprovadoGr"]').attr("disabled", false); 
+            }else if (status.trim() == "Aprovado Gerencia") {
+                $('input[name="aprovadoHr"]').prop('checked', true);
+                $('input[name="aprovadoHr"]').attr("disabled", true); 
+                $('input[name="aprovadoGr"]').prop('checked', true);
+                $('input[name="aprovadoGr"]').attr("disabled", true); 
+                document.getElementById("atualizarsubmit").disabled = true;
+            }
+
+            /*Trigger email send if checkbox Aprovado HR is clicked*/
             $('input[name="aprovadoHr"]').on('change', function() {
                 $('input[name="aprovadoHr"]').not(this).prop('checked', false);
                 if (confirm("Um email sera enviado para aprovacao, deseja continuar?!\nEither OK or Cancel.") == true) {
@@ -324,15 +330,27 @@ Gerente to approve.
                     //Send email and pass ID parameter
                     sendEmail(edit_id);
                     if (sendEmail) {
-                        $('input[name="aprovadoGr"]').attr("disabled", false);
+                        $('input[name="aprovadoGr"]').attr("disabled", true);
                         status = "1";
                     }
                 } else {
                     $('input[name="aprovadoHr"]').prop('checked', false);
                 }
-
             });
-
+            /*Trigger email send if checkbox Aprovado GR is clicked*/
+            $('input[name="aprovadoGr"]').on('change', function() {
+                if (confirm("Um email sera enviado para aprovacao, deseja continuar?!\nEither OK or Cancel.") == true) {
+                    $('input[name="aprovadoGr"]').prop('checked', true);
+                    $('input[name="aprovadoGr"]').attr("disabled", true);
+                    //Send email and pass ID parameter
+                    sendEmail(edit_id);
+                    if (sendEmail) {
+                        status = "2";
+                    }
+                }else {
+                    $('input[name="aprovadoGr"]').prop('checked', false);
+                }
+            });
         });
 
         //END SCRIPT
@@ -404,5 +422,4 @@ Gerente to approve.
         });
 });
 </script>
-
 </html>
