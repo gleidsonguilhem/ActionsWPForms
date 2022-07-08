@@ -96,7 +96,7 @@ no more actions is allowed.
                     if ($status == "1") {
                         echo "<font style='font-weight: bold; color: blue;'><i class='bi bi-clipboard2-fill'> Aprovado RH </i>";
                     } else if ($status == "2") {
-                        echo "<font style='font-weight: bolder; color: green';><i class='bi bi-clipboard2-data-fill'> Aprovado Gerencia </i>";
+                        echo "<font style='font-weight: bolder; color: green';><i class='bi bi-clipboard2-data-fill'> Finalizado </i>";
                     } else {
                         echo "<font style='font-weight: lighter; color: gray';><i class='bi bi-clipboard2-fill'> -</i>";
                     }
